@@ -1,0 +1,19 @@
+# --- C ---
+*.o
+*.obj
+*.exe
+matmul_avx512
+test_avx
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# --- Intel SDE & Logs ---
+sde-test-out.txt
+*.log
+
+# --- OS ---
+.DS_Store
