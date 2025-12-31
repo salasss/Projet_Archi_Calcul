@@ -14,6 +14,6 @@ venv/
 # --- Intel SDE & Logs ---
 sde-test-out.txt
 *.log
-
+sde-kit/
 # --- OS ---
 .DS_Store
