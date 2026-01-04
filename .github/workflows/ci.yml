@@ -20,11 +20,11 @@ jobs:
       
       - name: Compile
         working-directory: ./partie1_avx
-        run: make
+        run: gcc -O3 -mavx512f -o matmul_avx matmul_avx512.c -lm
       
       - name: Test
         working-directory: ./partie1_avx
-        run: ./matmul_avx
+        run: chmod +x matmul_avx && ./matmul_avx
 
   # Part 2: MPI
   build-part2:
