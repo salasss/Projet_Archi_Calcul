@@ -16,8 +16,7 @@ def estimate_pi(n_samples):
     for _ in range(n_samples):
         x = random.random()
         y = random.random()
-        if x*x + y*y < 1.0:
-            n_inside += 1
+        if x*x + y*y < 1.0: n_inside += 1
     return n_inside, n_samples
 
 def server():
