@@ -1,47 +1,47 @@
 [
   {
     "num_clients": 1,
-    "pi_estimate": 3.140643,
-    "error": 0.00095,
+    "pi_estimate": 3.142355,
+    "error": 0.000762,
     "total_samples": 10000000,
-    "time": 2.53,
-    "throughput": 3951302.0,
-    "output": "[Server] Starting with 1 clients, timeout=10.0s\n[Server] Client 1: pi=3.140643, error=0.000950, total_samples=10000000\n\n[Server] Final Results:\n  pi estimate: 3.140643\n  error: 0.000950\n  total samples: 10000000\n  time: 2.53s\n  samples/sec: 3951302\n[Client 1] Batch 1: received 'STOP'\n"
+    "time": 1.94,
+    "throughput": 5149223.0,
+    "output": "[Server] Starting with 1 clients, timeout=10.0s\n[Client 1] Batch 1: received 'STOP'\n[Server] Client 1: pi=3.142355, error=0.000762, total_samples=10000000\n\n[Server] Final Results:\n  pi estimate: 3.142355\n  error: 0.000762\n  total samples: 10000000\n  time: 1.94s\n  samples/sec: 5149223\n"
   },
   {
     "num_clients": 2,
-    "pi_estimate": 3.141298,
-    "error": 0.000294,
+    "pi_estimate": 3.141021,
+    "error": 0.000572,
     "total_samples": 20000000,
-    "time": 2.04,
-    "throughput": 9806582.0,
-    "output": "[Server] Starting with 2 clients, timeout=10.0s\n[Client 2] Batch 1: received 'STOP'\n[Server] Client 2: pi=3.141650, error=0.000057, total_samples=10000000\n[Server] Client 1: pi=3.141298, error=0.000294, total_samples=20000000\n\n[Server] Final Results:\n  pi estimate: 3.141298\n  error: 0.000294\n[Client 1] Batch 1: received 'STOP'\n  total samples: 20000000\n  time: 2.04s\n  samples/sec: 9806582\n"
+    "time": 2.18,
+    "throughput": 9155454.0,
+    "output": "[Server] Starting with 2 clients, timeout=10.0s\n[Server] Client 2: pi=3.141340, error=0.000253, total_samples=10000000\n[Client 2] Batch 1: received 'STOP'\n[Client 1] Batch 1: received 'STOP'\n[Server] Client 1: pi=3.141021, error=0.000572, total_samples=20000000\n\n[Server] Final Results:\n  pi estimate: 3.141021\n  error: 0.000572\n  total samples: 20000000\n  time: 2.18s\n  samples/sec: 9155454\n"
   },
   {
     "num_clients": 4,
-    "pi_estimate": 3.142094,
-    "error": 0.000502,
-    "total_samples": 50000000,
-    "time": 4.22,
-    "throughput": 11860780.0,
-    "output": "[Server] Starting with 4 clients, timeout=10.0s\n[Server] Client 3: pi=3.142754, error=0.001161, total_samples=10000000\n[Client 3] Batch 1: received 'CONTINUE'\n[Server] Client 1: pi=3.142173, error=0.000581, total_samples=20000000\n[Client 1] Batch 1: received 'STOP'\n[Server] Client 2: pi=3.142386, error=0.000793, total_samples=30000000\n[Client 2] Batch 1: received 'STOP'\n[Server] Client 4: pi=3.142155, error=0.000562, total_samples=40000000\n[Client 4] Batch 1: received 'STOP'\n[Client 3] Batch 2: received 'STOP'\n[Server] Client 3: pi=3.142094, error=0.000502, total_samples=50000000\n\n[Server] Final Results:\n  pi estimate: 3.142094\n  error: 0.000502\n  total samples: 50000000\n  time: 4.22s\n  samples/sec: 11860780\n"
+    "pi_estimate": 3.141539,
+    "error": 5.4e-05,
+    "total_samples": 40000000,
+    "time": 1.89,
+    "throughput": 21202808.0,
+    "output": "[Server] Starting with 4 clients, timeout=10.0s\n[Server] Client 3: pi=3.141757, error=0.000165, total_samples=10000000\n[Client 3] Batch 1: received 'STOP'\n[Server] Client 4: pi=3.141399, error=0.000193, total_samples=20000000\n[Client 4] Batch 1: received 'STOP'\n[Client 2] Batch 1: received 'STOP'\n[Server] Client 2: pi=3.141507, error=0.000086, total_samples=30000000\n[Client 1] Batch 1: received 'STOP'\n[Server] Client 1: pi=3.141539, error=0.000054, total_samples=40000000\n\n[Server] Final Results:\n  pi estimate: 3.141539\n  error: 0.000054\n  total samples: 40000000\n  time: 1.89s\n  samples/sec: 21202808\n"
   },
   {
     "num_clients": 8,
-    "pi_estimate": 3.141635,
-    "error": 4.2e-05,
+    "pi_estimate": 3.141704,
+    "error": 0.000111,
     "total_samples": 80000000,
-    "time": 3.84,
-    "throughput": 20810461.0,
-    "output": "[Server] Starting with 8 clients, timeout=10.0s\n[Server] Client 6: pi=3.141169, error=0.000423, total_samples=10000000\n[Client 6] Batch 1: received 'STOP'\n[Server] Client 3: pi=3.142039, error=0.000447, total_samples=20000000\n[Client 3] Batch 1: received 'STOP'\n[Server] Client 4: pi=3.141399, error=0.000194, total_samples=30000000\n[Client 4] Batch 1: received 'STOP'\n[Server] Client 8: pi=3.141560, error=0.000032, total_samples=40000000\n[Client 8] Batch 1: received 'STOP'\n[Server] Client 1: pi=3.141638, error=0.000046, total_samples=50000000\n[Client 1] Batch 1: received 'STOP'\n[Server] Client 5: pi=3.141561, error=0.000031, total_samples=60000000\n[Client 5] Batch 1: received 'STOP'\n[Server] Client 7: pi=3.141639, error=0.000046, total_samples=70000000\n[Client 7] Batch 1: received 'STOP'\n[Server] Client 2: pi=3.141635, error=0.000042, total_samples=80000000\n\n[Server] Final Results:\n  pi estimate: 3.141635\n  error: 0.000042\n  total samples: 80000000\n  time: 3.84s\n  samples/sec: 20810461\n[Client 2] Batch 1: received 'STOP'\n"
+    "time": 2.9,
+    "throughput": 27574300.0,
+    "output": "[Server] Starting with 8 clients, timeout=10.0s\n[Server] Client 7: pi=3.142245, error=0.000652, total_samples=10000000\n[Client 7] Batch 1: received 'STOP'\n[Server] Client 4: pi=3.141652, error=0.000059, total_samples=20000000\n[Client 4] Batch 1: received 'STOP'\n[Server] Client 8: pi=3.141832, error=0.000240, total_samples=30000000\n[Client 8] Batch 1: received 'STOP'\n[Server] Client 2: pi=3.141816, error=0.000223, total_samples=40000000\n[Client 2] Batch 1: received 'STOP'\n[Server] Client 6: pi=3.141814, error=0.000221, total_samples=50000000\n[Client 6] Batch 1: received 'STOP'\n[Server] Client 5: pi=3.141736, error=0.000143, total_samples=60000000\n[Client 5] Batch 1: received 'STOP'\n[Server] Client 1: pi=3.141710, error=0.000117, total_samples=70000000\n[Client 1] Batch 1: received 'STOP'\n[Server] Client 3: pi=3.141704, error=0.000111, total_samples=80000000\n\n[Server] Final Results:\n  pi estimate: 3.141704\n[Client 3] Batch 1: received 'STOP'\n  error: 0.000111\n  total samples: 80000000\n  time: 2.90s\n  samples/sec: 27574300\n"
   },
   {
     "num_clients": 16,
-    "pi_estimate": 3.141655,
-    "error": 6.2e-05,
+    "pi_estimate": 3.141572,
+    "error": 2.1e-05,
     "total_samples": 160000000,
-    "time": 9.26,
-    "throughput": 17278695.0,
-    "output": "[Server] Starting with 16 clients, timeout=10.0s\n[Server] Client 4: pi=3.141641, error=0.000048, total_samples=10000000\n[Client 4] Batch 1: received 'STOP'\n[Server] Client 16: pi=3.141632, error=0.000040, total_samples=20000000\n[Client 16] Batch 1: received 'STOP'\n[Server] Client 14: pi=3.141741, error=0.000148, total_samples=30000000\n[Client 14] Batch 1: received 'STOP'\n[Server] Client 2: pi=3.141462, error=0.000130, total_samples=40000000\n[Client 2] Batch 1: received 'STOP'\n[Server] Client 11: pi=3.141353, error=0.000239, total_samples=50000000\n[Client 11] Batch 1: received 'STOP'\n[Server] Client 13: pi=3.141404, error=0.000189, total_samples=60000000\n[Client 13] Batch 1: received 'STOP'\n[Server] Client 1: pi=3.141487, error=0.000105, total_samples=70000000\n[Client 1] Batch 1: received 'STOP'\n[Server] Client 15: pi=3.141567, error=0.000026, total_samples=80000000\n[Client 15] Batch 1: received 'STOP'\n[Server] Client 12: pi=3.141557, error=0.000036, total_samples=90000000\n[Client 12] Batch 1: received 'STOP'\n[Server] Client 9: pi=3.141601, error=0.000008, total_samples=100000000\n[Client 9] Batch 1: received 'STOP'\n[Server] Client 7: pi=3.141575, error=0.000017, total_samples=110000000\n[Client 7] Batch 1: received 'STOP'\n[Client 5] Batch 1: received 'STOP'\n[Server] Client 5: pi=3.141519, error=0.000074, total_samples=120000000\n[Server] Client 8: pi=3.141487, error=0.000105, total_samples=130000000\n[Client 8] Batch 1: received 'STOP'\n[Server] Client 6: pi=3.141512, error=0.000081, total_samples=140000000\n[Client 6] Batch 1: received 'STOP'\n[Server] Client 3: pi=3.141604, error=0.000012, total_samples=150000000\n[Client 3] Batch 1: received 'STOP'\n[Server] Client 10: pi=3.141655, error=0.000062, total_samples=160000000\n[Client 10] Batch 1: received 'STOP'\n\n[Server] Final Results:\n  pi estimate: 3.141655\n  error: 0.000062\n  total samples: 160000000\n  time: 9.26s\n  samples/sec: 17278695\n"
+    "time": 5.45,
+    "throughput": 29371044.0,
+    "output": "[Server] Starting with 16 clients, timeout=10.0s\n[Server] Client 6: pi=3.142126, error=0.000534, total_samples=10000000\n[Client 6] Batch 1: received 'STOP'\n[Server] Client 10: pi=3.141691, error=0.000098, total_samples=20000000\n[Client 10] Batch 1: received 'STOP'\n[Server] Client 7: pi=3.141624, error=0.000032, total_samples=30000000\n[Client 7] Batch 1: received 'STOP'\n[Server] Client 1: pi=3.141736, error=0.000143, total_samples=40000000\n[Client 1] Batch 1: received 'STOP'\n[Server] Client 8: pi=3.141753, error=0.000160, total_samples=50000000\n[Client 8] Batch 1: received 'STOP'\n[Server] Client 9: pi=3.141578, error=0.000014, total_samples=60000000\n[Client 9] Batch 1: received 'STOP'\n[Server] Client 2: pi=3.141588, error=0.000004, total_samples=70000000\n[Client 2] Batch 1: received 'STOP'\n[Server] Client 4: pi=3.141601, error=0.000009, total_samples=80000000\n[Client 4] Batch 1: received 'STOP'\n[Server] Client 12: pi=3.141638, error=0.000045, total_samples=90000000\n[Client 12] Batch 1: received 'STOP'\n[Server] Client 13: pi=3.141643, error=0.000050, total_samples=100000000\n[Client 13] Batch 1: received 'STOP'\n[Server] Client 15: pi=3.141655, error=0.000062, total_samples=110000000\n[Client 15] Batch 1: received 'STOP'\n[Server] Client 14: pi=3.141627, error=0.000034, total_samples=120000000\n[Client 14] Batch 1: received 'STOP'\n[Server] Client 5: pi=3.141564, error=0.000028, total_samples=130000000\n[Client 5] Batch 1: received 'STOP'\n[Server] Client 11: pi=3.141540, error=0.000052, total_samples=140000000\n[Client 11] Batch 1: received 'STOP'\n[Server] Client 16: pi=3.141585, error=0.000007, total_samples=150000000\n[Client 16] Batch 1: received 'STOP'\n[Server] Client 3: pi=3.141572, error=0.000021, total_samples=160000000\n\n[Server] Final Results:\n  pi estimate: 3.141572\n  error: 0.000021\n  total samples: 160000000\n  time: 5.45s\n  samples/sec: 29371044\n[Client 3] Batch 1: received 'STOP'\n"
   }
 ]
