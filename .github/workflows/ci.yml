@@ -18,13 +18,17 @@ jobs:
       - name: Install dependencies
         run: sudo apt-get update && sudo apt-get install -y gcc make
       
-      - name: Compile
+      - name: Compile naive version
         working-directory: ./partie1_avx
-        run: gcc -O3 -mavx512f -o matmul_avx matmul_avx512.c -lm
+        run: gcc -O3 -o matmul_naif matmul_naif.c -lm
       
-      - name: Test
+      - name: Compile (without AVX-512, GitHub Actions doesn't support it i think)
         working-directory: ./partie1_avx
-        run: chmod +x matmul_avx && ./matmul_avx
+        run: gcc -O3 -o matmul_avx matmul_avx512.c -lm
+      
+      - name: Test naive version
+        working-directory: ./partie1_avx
+        run: ./matmul_naif
 
   # Part 2: MPI
   build-part2:
