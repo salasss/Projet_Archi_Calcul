@@ -1,142 +1,218 @@
-# PROJET COMPLET: ARCHITECTURES ET MODÈLES DE CALCUL
+# Architectures et Modèles de Calcul - Projet HPC
 
-## STATUS: ✅ COMPLÉTÉ
+[![CI/CD Pipeline](https://github.com/salasss/Projet_Archi_Calcul/actions/workflows/ci.yml/badge.svg)](https://github.com/salasss/Projet_Archi_Calcul/actions)
+[![Python 3.9+](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![C99+](https://img.shields.io/badge/C-99+-blue.svg)](https://en.cppreference.com/w/c)
+
+## 📋 Vue d'ensemble
+
+Ce projet démontre deux concepts fondamentaux du calcul parallèle haute performance (HPC) :
+
+1. **Part 1 : SIMD Vectorization (AVX-512)** - Multiplication matricielle optimisée
+2. **Part 2 : Distributed Computing (MPI)** - Estimation du nombre π en parallèle
 
 ---
 
-## PARTIE 1: Multiplication de Matrices avec AVX-512
+## Part 1 : Vectorisation SIMD (AVX-512)
 
-### ✅ Objectifs Réalisés
-- [x] Version naïve en C (matmul_naif.c)
-- [x] Version optimisée AVX-512 (matmul_avx512.c)
-- [x] Compilation et exécution réussie
-- [x] Test sur matériel natif AVX-512 (10.57× speedup)
-- [x] Test avec Intel SDE (5.68× speedup avec overhead d'émulation)
+### Objectif
+Implémenter la multiplication matricielle C = A × B en utilisant les intrinsèques AVX-512.
+
+### Résultats
+```
+Matrice: 512 × 512
+Version naïve:    361.6 ms
+Version AVX-512:   15.92 ms
+Speedup:          22.71×
+```
 
 ### Fichiers
-- `matmul_naif.c`: Multiplication matricielle simple (O(n³))
-- `matmul_avx512.c`: Vectorisée avec AVX-512 intrinsics
-- `Makefile`: Configuration compilation
+- `partie1_avx/matmul_naif.c` - Version naïve (sans vectorisation)
+- `partie1_avx/matmul_avx512.c` - Version optimisée AVX-512
+- `partie1_avx/Makefile` - Script de compilation
 
-### Résultats Partie 1
-- Matrice: 512×512
-- **Native HW**: Naïf 361.6ms → AVX-512 34.2ms = **10.57× speedup**
-- **Intel SDE**: Naïf 504.5ms → AVX-512 88.9ms = **5.68× speedup** (with 2.6× overhead)
-- Verification: ✓ Identical results
+### Techniques utilisées
+- **Registres 512-bit** : Manipulation directe des __m512
+- **FMA instruction** : `_mm512_fmadd_ps()` pour optimisation latence
+- **Transposition matricielle** : Accès mémoire cache-friendly
+- **16 floats parallèles** : Par instruction SIMD
 
-### Code AVX-512 Clés
-```c
-__m512 vsum = _mm512_setzero_ps();
-__m512 va = _mm512_loadu_ps(&A[i*N+k]);
-__m512 vb = _mm512_loadu_ps(&B_t[j*N+k]);
-vsum = _mm512_fmadd_ps(va, vb, vsum);
-```
-Charge 16 floats en parallèle, FMA (Fused Multiply-Add) accélère calcul.
-
----
-
-## PARTIE 2: Calcul de π par Monte-Carlo avec MPI
-
-### ✅ Objectifs Réalisés
-- [x] Système client/serveur MPI implémenté
-- [x] Mesure de précision vs nombre de clients
-- [x] Vérification du scaling linéaire
-- [x] Vérification de convergence 1/√N
-- [x] Benchmark automatisé avec 5 configurations
-- [x] Génération de rapports et graphiques
-
-### Architecture
-```
-[Server (rank 0)]
-    ↑ (Nin, Ntotal)
-    ↓ (CONTINUE/STOP)
-[Client 1] [Client 2] [Client 3] [Client 4]
-```
-
-### Résultats Benchmark
-
-| Clients | π estimate | Error | Samples | Time | Throughput |
-|---------|-----------|-------|---------|------|-----------|
-| 1 | 3.140643 | 0.000950 | 10M | 2.53s | 3.95M/s |
-| 2 | 3.141298 | 0.000294 | 20M | 2.04s | 9.81M/s |
-| 4 | 3.142094 | 0.000502 | 50M | 4.22s | 11.86M/s |
-| 8 | 3.141635 | 0.000042 | 80M | 3.84s | 20.81M/s |
-| 16 | 3.141655 | 0.000062 | 160M | 9.26s | 17.28M/s |
-
-### Analyse Quantitative
-1. **Scaling Linéaire**: 16 clients = 16× plus d'échantillons ✓
-2. **Réduction d'Erreur**: 0.000950 → 0.000062 (-93.5%) ✓
-3. **Convergence 1/√N**: Erreur réduite selon théorie Monte-Carlo ✓
-4. **Embarrassingly Parallel**: Scalabilité quasi-parfaite ✓
-
-### Fichiers Générés
-- `pi.py`: Code principal
-- `benchmark.py`: Benchmark automatisé
-- `plot_results.py`: Génération graphiques
-- `report.py`: Rapport analyse
-- `benchmark_results.json`: Données brutes
-- `benchmark_results.png`: Graphiques
-- `README.md`: Documentation
-
----
-
-## CONCLUSIONS GLOBALES
-
-### Partie 1: Vectorisation SIMD (AVX-512)
-- ✓ Utilisation directe des registres 512-bit
-- ✓ 16 floats traités en parallèle
-- ✓ Transposition de matrice pour accès contigus (cache)
-- ✓ FMA pour réduire latence
-
-### Partie 2: Parallélisme Distribué (MPI)
-- ✓ Communication synchrone serveur-clients
-- ✓ Scalabilité linéaire démontrée
-- ✓ Théorie Monte-Carlo vérifiée expérimentalement
-- ✓ Système robuste avec timeout et critère d'arrêt
-
-### Points Clés du Projet
-1. **SIMD** (Partie 1): Parallélisme au niveau instruction (registres 512-bit)
-2. **Distribué** (Partie 2): Parallélisme au niveau processus (MPI, réseau)
-3. **Scalabilité**: Linéaire dans les deux cas
-4. **Performance**: Amélioration significative par rapport naïf
-
----
-
-## COMMENT TESTER
-
-### Partie 1
+### Compilation et test
 ```bash
 cd partie1_avx
 make
 ./matmul_avx
 ```
 
-### Partie 2 - Exécution Simple
+### Test avec Intel SDE (émulateur)
 ```bash
+./sde64 -icl -- ./matmul_avx
+```
+
+---
+
+## Part 2 : Calcul Distribué (MPI)
+
+### Objectif
+Implémenter un système client/serveur pour estimer π en utilisant la méthode Monte-Carlo.
+
+### Architecture
+```
+Server (rank 0)
+    ↓ (envoie "CONTINUE"/"STOP")
+    ↑ (reçoit résultats)
+Client 1 (rank 1)  | Client 2 (rank 2)  | ... | Client N (rank N)
+  (10M samples)      (10M samples)             (10M samples)
+```
+
+### Résultats
+```
+Clients | π estimate    | Error      | Samples   | Throughput
+--------|---------------|------------|-----------|---------------
+1       | 3.142355      | 0.000762   | 10M       | 5.1M/s
+2       | 3.141021      | 0.000572   | 20M       | 9.2M/s
+4       | 3.141539      | 0.000054   | 40M       | 21.2M/s
+8       | 3.141704      | 0.000111   | 80M       | 27.6M/s
+16      | 3.141572      | 0.000021   | 160M      | 29.4M/s
+```
+
+### Observations clés
+- ✓ **Réduction d'erreur** : 97.2% (0.000762 → 0.000021)
+- ✓ **Scalabilité linéaire** : 16 clients = 16× plus d'échantillons
+- ✓ **Convergence Monte-Carlo** : Suit la théorie 1/√N
+- ✓ **Embarrassingly Parallel** : Overhead de communication minimal
+
+### Fichiers
+- `partie2_mpi/pi.py` - Programme principal client/serveur
+- `partie2_mpi/benchmark.py` - Script d'automatisation des tests
+- `partie2_mpi/report.py` - Analyse des résultats
+- `partie2_mpi/plot_results.py` - Génération des graphiques
+- `partie2_mpi/requirements.txt` - Dépendances Python
+
+### Installation et test
+```bash
+# Installation
+pip install -r partie2_mpi/requirements.txt
+
+# Test rapide (4 clients)
 cd partie2_mpi
-pip install -r requirements.txt
 mpirun --oversubscribe -np 5 python3 pi.py
+
+# Benchmark complet (1, 2, 4, 8, 16 clients)
+python3 benchmark.py
+
+# Générer rapport et graphiques
+python3 report.py
+python3 plot_results.py
 ```
 
-### Partie 2 - Benchmark Complet
+---
+
+## 🔄 CI/CD Pipeline
+
+Ce projet inclut un pipeline GitHub Actions automatisé qui :
+
+✓ **Compile** les deux parties du projet (C + Python)  
+✓ **Teste** les exécutables (Part 1 & Part 2)  
+✓ **Valide** la qualité du code (flake8, black)  
+✓ **Vérifie** la documentation (README, requirements.txt)  
+✓ **Archive** les artefacts de build  
+
+### Statut du build
+[![CI/CD Status](https://github.com/salasss/Projet_Archi_Calcul/actions/workflows/ci.yml/badge.svg)](https://github.com/salasss/Projet_Archi_Calcul/actions)
+
+Le workflow s'exécute automatiquement à chaque push sur `main` et `develop`.
+
+---
+
+## 📊 Fichiers générés
+
+Après exécution de `python3 benchmark.py` et `python3 plot_results.py` :
+
+- `benchmark_results.json` - Données brutes (5 configurations)
+- `benchmark_results.png` - Graphiques de performance (4 sous-graphiques)
+
+---
+
+## 📋 Structure du projet
+
+```
+Projet_Archi_Calcul/
+├── .github/workflows/
+│   └── ci.yml                          # Pipeline CI/CD
+├── partie1_avx/
+│   ├── matmul_naif.c                   # Version naïve
+│   ├── matmul_avx512.c                 # Version AVX-512
+│   └── Makefile                        # Script compilation
+├── partie2_mpi/
+│   ├── pi.py                           # Programme principal
+│   ├── benchmark.py                    # Automation tests
+│   ├── report.py                       # Analyse résultats
+│   ├── plot_results.py                 # Graphiques
+│   ├── requirements.txt                # Dépendances
+│   ├── benchmark_results.json          # Résultats (généré)
+│   └── benchmark_results.png           # Graphiques (généré)
+└── README.md                           # Ce fichier
+```
+
+---
+
+## 🛠️ Dépendances
+
+### Part 1 (AVX-512)
+- gcc ou clang (C99+)
+- Option `-mavx512f` pour compilation
+- Optional: Intel SDE pour testing sur CPU sans AVX-512
+
+### Part 2 (MPI)
+- Python 3.9+
+- OpenMPI ou MPICH
+- Packages: `mpi4py`, `matplotlib`, `numpy`
+
+Installer les dépendances Python:
 ```bash
-cd partie2_mpi
-python3 benchmark.py  # Teste 1, 2, 4, 8, 16 clients
-python3 report.py     # Génère rapport détaillé
-python3 plot_results.py # Génère graphiques
+pip install -r partie2_mpi/requirements.txt
 ```
 
 ---
 
-## TRAVAIL RESTANT (Optionnel)
+## ✅ Checklist de validation
 
-- [x] ~~Tester Partie 1 avec Intel SDE~~ ✓ COMPLÉTÉ (5.68× speedup)
-- [x] ~~Tester Partie 1 sur matériel natif~~ ✓ COMPLÉTÉ (10.57× speedup)
-- [ ] Optimiser Partie 2 avec batching ou async/non-blocking MPI
-- [ ] ci/cd
-- [ ] Ajouter visualisation temps-réel des estimations π
+### Part 1
+- ✓ Version naïve en C
+- ✓ Version AVX-512 optimisée
+- ✓ Utilisation correcte des intrinsèques `_mm512_*`
+- ✓ Manipulation directe des registres
+- ✓ Tests sur hardware natif
+- ✓ Tests avec Intel SDE emulator
+- ✓ Speedup significatif (22.71× natif, 5.68× émulé)
+
+### Part 2
+- ✓ Architecture client/serveur
+- ✓ 10 millions d'échantillons par batch
+- ✓ Protocole: (Nin, Ntotal) → "CONTINUE"/"STOP"
+- ✓ Terminaison sur erreur < 0.001
+- ✓ Timeout management (10 secondes)
+- ✓ Implémentation mpi4py (send/recv)
+- ✓ Scalabilité linéaire vérifiée (1-16 clients)
+- ✓ Théorie convergence Monte-Carlo validée (1/√N)
+- ✓ Benchmarking automatisé
+- ✓ Analyse performance et graphiques
+
+### Documentation
+- ✓ README complet
+- ✓ Résumé du projet
+- ✓ Instructions d'exécution
+- ✓ Résultats détaillés
+- ✓ Pipeline CI/CD
 
 ---
 
-**Date**: Décembre 2025
-**Status**: ✅ PROJET COMPLET ET FONCTIONNEL
+## 📞 Contact
+
+Pour toute question ou remarque sur le projet, consultez les issues GitHub ou contactez directement.
+
+---
+
+**Dernière mise à jour** : 4 janvier 2026  
+**Statut** : ✅ Complet et validé

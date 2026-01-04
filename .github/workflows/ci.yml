@@ -1,0 +1,53 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # Part 1: AVX-512
+  build-part1:
+    name: Part 1 - AVX-512
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y gcc make
+      
+      - name: Compile naive version
+        working-directory: ./partie1_avx
+        run: gcc -O3 -o matmul_naif matmul_naif.c -lm
+      
+      - name: Test naive version
+        working-directory: ./partie1_avx
+        run: ./matmul_naif
+      
+      - name: Note on AVX-512
+        run: echo "AVX-512 compilation tested locally on hardware with AVX-512 support"
+
+  # Part 2: MPI
+  build-part2:
+    name: Part 2 - MPI
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openmpi-bin libopenmpi-dev
+          pip install -r partie2_mpi/requirements.txt
+      
+      - name: Run MPI test
+        working-directory: ./partie2_mpi
+        run: mpirun --oversubscribe -np 3 python3 pi.py
